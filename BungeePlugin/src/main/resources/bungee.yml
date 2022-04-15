@@ -1,0 +1,4 @@
+name: LibCMDTest
+version: 1.0.0
+author: 360matt
+main: fun.listenia.libcmd.test.Main
