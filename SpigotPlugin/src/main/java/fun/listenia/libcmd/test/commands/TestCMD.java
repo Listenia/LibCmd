@@ -3,6 +3,8 @@ package fun.listenia.libcmd.test.commands;
 import fun.listenia.libcmd.command.Builder;
 import fun.listenia.libcmd.command.CommandBukkit;
 import fun.listenia.libcmd.handler.BukkitHandler;
+import fun.listenia.libcmd.tab.BukkitTab;
+import java.util.List;
 
 public class TestCMD extends CommandBukkit {
     @Override
@@ -30,6 +32,21 @@ public class TestCMD extends CommandBukkit {
                         if (requirePlayer()) {
                             sendMessage("Vous êtes un joueur");
                         }
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
+    public BukkitTab tab() {
+        return new BukkitTab() {
+            @Override
+            public void execute (List<String> res) throws Exception {
+                if (this.is(0, "realTime")) {
+                    if (is(1)) {
+                        sendMessage("Argument 2 : " + getString(1));
+                        res.add(getString(1) + getString(1).hashCode());
                     }
                 }
             }

@@ -3,6 +3,8 @@ package fun.listenia.libcmd.test.commands;
 import fun.listenia.libcmd.command.Builder;
 import fun.listenia.libcmd.command.CommandBungee;
 import fun.listenia.libcmd.handler.BungeeHandler;
+import fun.listenia.libcmd.tab.BungeeTab;
+import java.util.List;
 
 public class TestCMD extends CommandBungee {
     @Override
@@ -36,4 +38,18 @@ public class TestCMD extends CommandBungee {
         };
     }
 
+    @Override
+    public BungeeTab tab() {
+        return new BungeeTab() {
+            @Override
+            public void execute (List<String> res) throws Exception {
+                if (this.is(0, "realTime")) {
+                    if (is(1)) {
+                        sendMessage("Argument 2 : " + getString(1));
+                        res.add(getString(1) + getString(1).hashCode());
+                    }
+                }
+            }
+        };
+    }
 }

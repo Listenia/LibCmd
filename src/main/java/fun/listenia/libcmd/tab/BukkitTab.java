@@ -1,4 +1,4 @@
-package fun.listenia.libcmd.handler;
+package fun.listenia.libcmd.tab;
 
 import fun.listenia.libcmd.exceptions.*;
 import org.bukkit.Bukkit;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BukkitHandler extends Handler {
+public abstract class BukkitTab extends Tab {
 
     private CommandSender sender;
 
@@ -32,12 +32,6 @@ public abstract class BukkitHandler extends Handler {
         }
     }
 
-    public boolean requirePlayer () throws RequiredPlayerException {
-        if (sender instanceof org.bukkit.entity.Player)
-            return true;
-        throw new RequiredPlayerException();
-    }
-
     public boolean isPlayer () {
         return sender instanceof org.bukkit.entity.Player;
     }
@@ -46,12 +40,6 @@ public abstract class BukkitHandler extends Handler {
         if (isPlayer())
             return (org.bukkit.entity.Player) sender;
         throw new NotPlayerException();
-    }
-
-    public boolean requireConsole () throws RequiredConsoleException {
-        if (sender instanceof org.bukkit.command.ConsoleCommandSender)
-            return true;
-        throw new RequiredConsoleException();
     }
 
     public boolean isConsole () {
@@ -157,7 +145,4 @@ public abstract class BukkitHandler extends Handler {
     public boolean is (int index, @NotNull OfflinePlayer value) {
         return is(index) && value.equals(Bukkit.getOfflinePlayer(getString(index)));
     }
-
-
-
 }

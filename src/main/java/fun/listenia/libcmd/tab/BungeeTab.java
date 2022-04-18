@@ -1,16 +1,13 @@
-package fun.listenia.libcmd.handler;
+package fun.listenia.libcmd.tab;
 
 import fun.listenia.libcmd.exceptions.ArgNotPlayerException;
-import fun.listenia.libcmd.exceptions.RequiredConsoleException;
-import fun.listenia.libcmd.exceptions.RequiredPlayerException;
 import fun.listenia.libcmd.exceptions.NotPlayerException;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BungeeHandler extends Handler {
-
+public abstract class BungeeTab extends Tab {
     private CommandSender sender;
 
     public void defineSender (CommandSender sender) {
@@ -31,12 +28,6 @@ public abstract class BungeeHandler extends Handler {
         }
     }
 
-    public boolean requirePlayer () throws RequiredPlayerException {
-        if (sender instanceof ProxiedPlayer)
-            return true;
-        throw new RequiredPlayerException();
-    }
-
     public boolean isPlayer () {
         return sender instanceof ProxiedPlayer;
     }
@@ -45,12 +36,6 @@ public abstract class BungeeHandler extends Handler {
         if (isPlayer())
             return (ProxiedPlayer) sender;
         throw new NotPlayerException();
-    }
-
-    public boolean requireConsole () throws RequiredConsoleException {
-        if (!(sender instanceof ProxiedPlayer))
-            return true;
-        throw new RequiredConsoleException();
     }
 
     public boolean isConsole () {
@@ -91,6 +76,5 @@ public abstract class BungeeHandler extends Handler {
     public boolean is (int index, @NotNull ProxiedPlayer value) {
         return is(index) && value.equals(ProxyServer.getInstance().getPlayer(getString(index)));
     }
-
 
 }

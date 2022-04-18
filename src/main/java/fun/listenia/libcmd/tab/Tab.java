@@ -1,18 +1,20 @@
-package fun.listenia.libcmd.handler;
+package fun.listenia.libcmd.tab;
 
-public abstract class Handler implements Cloneable {
+import java.util.List;
+
+public abstract class Tab implements Cloneable {
 
     private String[] args;
 
-    public abstract void execute () throws Exception;
+    public abstract void execute (List<String> res) throws Exception;
 
     public void defineArgs(String[] args) {
         this.args = args;
     }
 
     @Override
-    public Handler clone () throws CloneNotSupportedException {
-        return (Handler) super.clone();
+    public Tab clone () throws CloneNotSupportedException {
+        return (Tab) super.clone();
     }
 
     public String[] getArgs () {
