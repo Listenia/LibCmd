@@ -44,6 +44,14 @@ public abstract class Handler implements Cloneable {
         return is(index) && getString(index).equals(value);
     }
 
+    public boolean is (int index, String... values) {
+        if (!is(index)) return false;
+        for (String value : values) {
+            if (getString(index).equals(value)) return true;
+        }
+        return false;
+    }
+
     public boolean isInt (int index) {
         return isString(index) && getString(index).matches("\\d+");
     }
